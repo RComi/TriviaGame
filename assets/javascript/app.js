@@ -7,7 +7,7 @@ $(document).ready(function () {
         time: 20,
         reset: function () {
             this.time = 20;
-            $('.clock').append('<h2>' + 'Time Remaining:    ' + this.time + '</h2>');
+            $('.clock').append('<h3>' + 'Time Remaining:    ' + this.time + '</h3>');
         },
 
         start: function () {
@@ -23,7 +23,7 @@ $(document).ready(function () {
 
             $('.clock').html(clockCounter.time);
             if (clockCounter.time >= 0) {
-                $('.clock').html('<h2> Time Remaining:  ' + clockCounter.time + '</h2>');
+                $('.clock').html('<h3> Time Remaining:  ' + clockCounter.time + '</h3>');
             } else {
                 index++;
                 wrongAnswer();
@@ -33,7 +33,7 @@ $(document).ready(function () {
                     loadQuestion(index);
                 } else {
                     $('#choices').hide();
-                    //showScore();
+                    showScore();
                 }
             }
         }
@@ -152,13 +152,14 @@ $(document).ready(function () {
     //object to pull the question and choices to populate the form
     function loadQuestion(questionSelected) {
         clockCounter.reset();
-        $('#question').html('<h3>' + questions[questionSelected].question + '</h3>');
-        $('#choiceA').append('<text>' + questions[questionSelected].choices[0] + '</text>');
-        $('#choiceB').append('<text>' + questions[questionSelected].choices[1] + '</text>');
-        $('#choiceC').append('<text>' + questions[questionSelected].choices[2] + '</text>');
-        $('#choiceD').append('<text>' + questions[questionSelected].choices[3] + '</text>');
+        $('#question').html('<h2>' + questions[questionSelected].question + '</h2>');
+        $('#choiceA').append('<p>' + questions[questionSelected].choices[0] + '</p>');
+        $('#choiceB').append('<p>' + questions[questionSelected].choices[1] + '</p>');
+        $('#choiceC').append('<p>' + questions[questionSelected].choices[2] + '</p>');
+        $('#choiceD').append('<p>' + questions[questionSelected].choices[3] + '</p>');
     }
 
+    //start button, click to start the game, hide the button and start counter, 
     function setup() {
         index = 0;
         $('#buttoncontrol').append('<button id="startbutton">' + 'Start' + '</button>');
@@ -184,20 +185,23 @@ $(document).ready(function () {
         })
     }
 
+    //correct answer link to populate image and display message
     function correctAnswer() {
         correct++;
         alert("You got It!");
     }
 
+    //Incorrect answer post the correct answer, message and image
     function wrongAnswer() {
         incorrect++;
         alert("Incorrect");
     }
 
+    //score board to show correct, incorrect and unanswered also to reset game
     function score() {
         $('#question').empty();
-        $('#questions').append('<h2><p>' + correct + " correct</p></h2>");
-        $('#questions').append('<h2><p>' + wrong + " correct</p></h2>");
+        $('#questions').append('<h3><p>' + correct + " correct</p></h3>");
+        $('#questions').append('<h3><p>' + wrong + " correct</p></h3>");
         clockCounter.stop();
         $('.clock').empty();
     }
